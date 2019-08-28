@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: paulbickell
+Build-Jdk: 11.0.2
+Implementation-Title: SpringMvcRoutePlanner
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.routeplanner
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/SpringMvcRoutePlanner
+Created-By: Maven Integration for Eclipse
+

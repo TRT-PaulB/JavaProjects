@@ -1,0 +1,112 @@
+.errorMsg {
+	color: red;
+	font-size: 15px;        
+}
+
+.navbar-cell {
+	padding-right: 30px;	
+	
+}
+
+
+.formButton
+{
+	background-color: #6699FF;
+	color: black;
+	font-weight: bold;
+	text-alignment: center;
+}
+
+
+.button-link {
+     background: none!important;
+     /*color: inherit;*/
+     color: blue;
+     border: none; 
+     padding: 0!important;
+     font: inherit;
+     font-size: 11px;
+     text-decoration: none;
+     border-bottom:1px solid #444; 
+     cursor: pointer;
+}
+
+
+
+.formButtonProceed
+{
+	background-color: #00cc00;
+	color: black;
+	font-weight: bold;
+	text-alignment: center;
+}
+
+ 
+div.mainDiv
+{
+	background-color: #FFFFCC;
+	border: solid 1px black;
+	width: 55%;
+	
+	padding: 15px;
+}
+
+
+.mainDivSize {
+	min-height: 230px;	
+}
+
+
+.header {
+	font-weight: bold;
+	padding-top: 1px;
+	padding-left: 10px;
+	padding-bottom: 60px;
+}
+
+
+input.form-field-space {
+	padding-right: 40px;
+}
+
+
+.table-header {
+	font-type: 12px/30px Georgia, serif;
+	text-decoration: underline;
+}
+
+
+.table-msg {
+	font-type: italic bold 12px/30px Georgia, serif;
+	padding-top: 35px;
+}
+
+
+.open-table {
+	border-spacing: 5px;
+}
+
+.display-inline {
+	display:block;
+	float:left;
+	padding-right: 30px;
+}
+
+div.inlineBlock {
+	display: inline-block;
+}
+
+
+.testBorder {
+	border: solid 1px red;
+}
+
+.testBorder2 {
+	border: solid 1px blue;
+}
+
+.testBorder3 {
+	border: solid 1px green;
+}
+
+
