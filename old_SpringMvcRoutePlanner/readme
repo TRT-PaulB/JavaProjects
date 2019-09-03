@@ -1,0 +1,324 @@
+ SPRING MVC ROUTE PLANNER
+ 
+ localhost:8080/routeplanner/
+ localhost:8080/routeplanner/login
+  
+ --------------------------------------
+ Techniques:
+ 
+ - session var
+ 
+ - return "redirect:/admin/rates/prices";
+ 
+ - use of model attribute (eg User, list) ==> ${}
+   map.addAttribute("testModelMap", "model map property");
+   <p th:text="'Test model app property: ' + ${testModelMap}" />
+    
+ - direct usage from internationalization file
+   <h1 th:text = "#{international.text}"></h1>
+ 
+ - form object binding with thyme
+   mv.addObject("statement", statement);
+   <textarea rows="4" cols="50" th:field="*{summary}">Summary</textarea>
+ 
+ - session variable:
+   session ==> ${session.} 
+   request.getSession().setAttribute("xxx",zzz);
+ 
+ - get current dir
+   String currLocation = System.getProperty("user.dir");
+ 
+ - Get props in bespoke location:
+   ResourceBundle rb = ResourceBundle.getBundle("config.sysprops"); [folder + file prefix]
+   String value = rb.getString("database.name");
+ 
+ - specific errors:
+   https://stackoverflow.com/questions/37398385/spring-boot-and-custom-404-error-page
+ 
+ - handling enums:
+   https://memorynotfound.com/mapping-enum-types-hibernate-example/
+ 
+ - drop downs populated from enum and result read into form object as enum property
+   see PassengerType to populate with translated text in java - is there a better way of doing this?
+  
+ - controller read from session:
+   Incident incidentX = (Incident)session.getAttribute("mockInc");
+ 
+ - include fragments:
+   https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#rendering-template-fragments
+ 
+ - thymeleaf
+   https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#introducing-thymeleaf
+ 
+ - mix file var and session / model: 
+   th:text="'The name of the user is ' + ${user.name}"
+ 
+ - conditionals: (see also 4.10)
+   <div th:if="${user.isAdmin()} == false"> 
+   <div th:if="${user.isAdmin() == false}">
+   <div th:if="${!user.isAdmin() and !user.isMember()}" th:text = "#{rp.login.title}"></div>
+ 
+ - service tests
+   https://medium.freecodecamp.org/unit-testing-services-endpoints-and-repositories-in-spring-boot-4b7d9dc2b772
+ 
+ - validation:
+   (bespoke) https://docs.spring.io/spring/docs/2.0.x/reference/validation.html
+             --> Annotations: https://docs.jboss.org/hibernate/beanvalidation/spec/2.0/api/javax/validation/constraints/package-summary.html
+             --> Validator API: https://docs.jboss.org/hibernate/beanvalidation/spec/2.0/api/javax/validation/Validator.html
+ 
+ - hibernate JPA: using abstract superclass for subclasses which are annotated with @Entity
+   https://stackoverflow.com/questions/3827494/inherited-abstract-class-with-jpa-hibernate
+ 
+ - useful spring boot properties:
+   https://docs.spring.io/spring-boot/docs/1.1.4.RELEASE/reference/htmlsingle/#common-application-properties
+ 
+ - formatting dates:
+   https://www.baeldung.com/dates-in-thymeleaf
+   https://stackoverflow.com/questions/45291061/spring-boot-thymeleaf-getting-time-from-input
+   
+   https://stackoverflow.com/questions/34883357/spring-java-time-localdatetime-binding-issue
+ 
+ - tabular output:
+   https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#iteration-basics
+   
+   
+   https://stackoverflow.com/questions/38367339/thymeleaf-how-to-loop-a-list-by-index
+ 
+   https://stackoverflow.com/questions/17692941/values-for-thfield-attributes-in-checkbox
+   https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#creating-a-form
+
+	Date format too: https://stackoverflow.com/questions/49570719/using-input-type-hidden-combine-with-thymeleaf
+	
+ =========================================
+ possible avenues:
+ 
+ https://stackoverflow.com/questions/34959430/bootstrap-datatable-with-select-column-with-radio-button
+ 
+ 
+ CSS:
+ https://css-tricks.com/forums/topic/selecting-radio-button-when-table-row-is-clicked/
+ 
+ 
+ <li th:each="item: *{tickets}">
+	        <input type="radio" th:field="*{currentSelection}" th:value="${item}" />
+	        <label th:for="${#ids.prev('currentSelection')}" th:text="${item.ticketType.descriptionTrans}"></label>                                   
+	        <label th:for="${#ids.prev('currentSelection')}" th:text="${item.passengerType.codeDisplay}"></label>
+	        <label th:for="${#ids.prev('currentSelection')}" th:text="${item.numUnits}"></label>
+	        <label th:for="${#ids.prev('currentSelection')}" th:text="${item.travelDate}"></label>
+		</li>
+ 
+ DELETING AN OBJECT QITH A SUBMIT BUTTON:
+ https://stackoverflow.com/questions/43606063/spring-thymeleaf-delete-object-from-html-table-and-pass-id-to-controller
+ 
+ 
+ 
+ =========================================
+ 
+ - OK fix button
+ - OK refactor existing with new model
+ - OK improve travelInfoService
+ - OK investigate and refactor the model to use composition if necessary.................
+ - OK database + load sql file for non-admin / membership use
+   --> OK save initial basket dummy
+   --> OK save actual initial basket 
+   --> OK use user1 from data.sql
+   --> OK refactor Rule for simplicity! remove relevantItems
+   --> OK research Date and hibernate [resorting to LocalDateTime + LocalDate]
+   --> OK decision on usage of DataModel
+   --> OK add hibernate: PassengerType ==> Rule ==> RouteQuery ==> Ticket ==> inehritance and hibernate ==> Order ==> purchase ==> PaymentInfo
+   --> OK ddl for ContactDetails, Person
+   --> OK complete ddl for ticket, order and purchase
+   --> OK complete ddl for basket   
+   --> OK complete repositories
+    --> OK add in the role level conversions
+       --> OK decouple db from enum
+       --> OK apply RoleLevel in User with actual roles and the static UserLevel methods, or convert direct in thyme if possible
+       --> OK sort out navbar logic to avoid malformation for different roles 
+   --> OK insert passenger types as per the old system
+   --> OK handle ticket types enums (eg on peak, off peak) 
+   --> OK refactor to add basket page [tickets list and add new ticket]
+       --> OK adapt view_basket page  
+       --> OK direct to checkout page (which will include payment details and person details) 
+   --> OK implement place order (add to basket)
+   --> OK confirm flow is final
+   --> IN PROGRESS view basket page: 
+       --> 1st form: 
+           --> OK resolve passenger type and ticket type translation issues
+           --> OK add num units
+           --> OK add ticket travel date
+           --> OK add open OR fix the dm to avoid having to do this
+      --> FIXED investigate ddl issue that seems to have started around Wednesday mid-pm (added old rp tables)
+   
+===========================================================================================================================
+===========================================================================================================================
+***************************** STATE OF PLAY *****************************   
+===========================================================================================================================
+===========================================================================================================================
+ISSUES AND CORE JOURNEY:
+
+- clean up existing mess
+  - OK tidy existing basket code
+  - OK remove all the artificial counters!
+  - OK keep a record of the changes for the payment info stuff
+  - OK get working and smarten basket presentation a little (ie with table and headers and remove unnecessary th:text fields)
+    --> OK new ticket values need to set the defaults
+    --> OK give basket contents a min height
+    --> OK apply logic for msg 
+- OK persist basket and items, and maybe shopping trolley
+- OK improve the display for add ticket / basket contents page (ie tables and border)
+- OK write queries to get basket contents, route info and rules from db
+- OK save basket to the db at login if one is not in session
+- OK find any basket that is not empty and sort out the logic for this  
+- OK get this working?
+- OK tidy up usage of session: incl BasketController.addTicket()
+- OK add route info and other details to the ticket persistence
+- OK add new ticket needs to have labels for the start and destination
+- OK add start and destination on ticket type causes a crash
+- OK research workaround for adding parameters when referencing internationalization files & put start and destination at top of new ticket title
+- OK search another journey button:  Add Another Journey
+- OK make sure there is no inconsistency between session and model usage
+- OK separate flow so there is a contact details and then a payment info page
+- OK personal details page
+- OK persistence of Order and Purchase
+- OK need to dump some data from shopping variable on the sale confirmation page
+- OK separate out db calls into daos, and services and implement transactions and db exception handling
+  --> OK poc: DAOs are not necessary!
+  --> OK BasketService, ContactDetailsService, OrderService, PaymentInfoService, PersonService, PurchaseService, RoleService, RouteQueryService, 
+         RuleService, TicketService, UserService
++ OK post purchase housekeeping
++ OK start a new shopping spree housekeeping
+- OK add in dde
+- OK poc basic OOB spring form validation on server side (on contact details page)
+- OK query page msg is not red!!!!
+- OK put contact-details.html into its own file for other use in the registration / admin corner sections
+- OK add proper exception handling from services and test transactions are working
+  --> OK all controllers using shopping db methods
+  --> OK usage of: TravelInfoService.getJourneyDetails()
+- OK still an issue when an initial search is done, then an invalid search is performed, the user can then still proceed to checkout. Needs fixing
+- OK think again about the open flag on items (is it enough to rely on the open flag on the basket)?
+- OK consider dynamic locale retrieval in enums (card type, ticket type, passenger type)
+- NOT_COMPLETEadd poc controller test and all unit test method stubs
+  https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+  --> OK complete shopping dao
+  --> OK apply very basic mockito service test [SERVICES MOCKITO: @RunWith(MockitoJUnitRunner.class)]
+  --> OK startup and destroy
+  --> OK TravelInfoService 
+  --> FAIL poc on controller test
+  --> FAIL consolidate old engine tests - none found!!!!
+  - OK still need to tidy up local in controllers
+  - OK add poc bespoke validator (to show how it is done and to ensure only numeric digits are added on phone fields on contact details page)
+  - OK error page handling:
+  --> OK apply error handling in the contoller when services mess up (implemented at checkout), otherwise rely on error page
+  --> OK test that transaction management is working
+- OK issue: persistence of passenger type and ticket type enums seems always to be 0.....cannot be right
+- OK validation handling digits on card number.....and sec code
+- OK basket.tickets is null after completing a purchase and then coming back to start a new journey (this time on an empty basket)
+- OK apply the remove checkbox to the basket contents instead of the current radio
+  - https://stackoverflow.com/questions/36500731/how-to-bind-an-object-list-with-thymeleaf [input checkbox]
+  - https://stackoverflow.com/questions/43606063/spring-thymeleaf-delete-object-from-html-table-and-pass-id-to-controller [remove]
+  --> OK this involves refactoring how basket works:
+      --> OK persist basket
+      --> OK persist / remove / modify items as they come
+      --> OK change to link with id as param or make spacing between rows bigger
+      --> refactor basket controller code to avoid duplication                 
+      --> refactor to use link instead
+      - OK remove link needs to replace radios (but note the methods for radios and checkboxes)
+- OK view basket - proceed to checkout only if tickets exist in the basket
+- OK trim automatic spring boot column sizes
+- OK all services - log the id of the items once they have been persisted / deleted + shopping
+- OK add validation on login page
+--> OK a blank email field is not working....
+- OK list problems, techs and model / new stuff / extensions / mvc / purpose and approach / main spiel
+- OK design journey for a) registration (non-members) b) admin corner (admin) c) purchase history
+- OK implementing registration so that a newly registered user can be user in the ap
+- OK error handling for registration
+- OK add in a check on the password....and make sure the user has member status....... 
+---------------------------------------   
+COMPLETE CORE FUNCTIONALITY    
+
+
+- implement change password
+
+
+- implement purchase history
+- implement admin corner
+  - manage users
+  - manage rule implementation
+
+--------------------------------------- 
+BUGS:  
+  
+- RESOLVED dao unit test of getting user post script changes. 
+- RESOLVED the H2 config has disappeared.....and @TestPropertySource is not working......  
+- RESOLVED run unit tests together together (reolved with @TestPropertySource)
+- implementing registration
+  ==> BUG: transaction rollback in not working in UsrService.register()
+  ==> on a 2nd registration.......the registration falls on the 2nd round because it cannot persist in the user_role with same ids 
+- bug: save first batch and basket / item id is false as expected.
+       on a second trip those same objects are set to true!!!!  And the new objects are also then correctly set to true. 
+       - OK at what stage does this get distored in the db? - always on the 2nd checkout.......
+       - OK refactor the open basket code 
+- bug: refreshing the view-basket page adds a new item!!!
+- safety with the back button
+  --> CheckoutController, see todo: sometimes the basket is lost from the order
+- what about if starting a new journey on the 2nd lap with an existing basket containing items??
+  - currently the basket is refreshed (incorrectly)
+- add proper date validation on view-basket and checkout pages: date of travel (view basket) + expiry date on checkout
+- validation on user login page goes particularly wonky!   
+---------------------------------------
+MAJOR EXTENSIONS   
+
+   --> add spring data
+   --> spring security
+   --> implement rules for special deals
+   --> select payment method
+   --> give user option to change the locale with flag images   
+   --> more sophisticated HTML, CSS and js - redesign frontend
+   --> add system images incl basket
+   --> jasper reports
+   --> liquibase
+   --> archiving
+   --> auditing
+   --> allow for oracle as well as mysql + sqlserver, adapt with dialects
+   --> upgrade to spring boot 3.0
+   --> update all the prop files for all langs
+   --> apply zones coverage
+   --> javadocs   
+
+   --> research spring boot profiles for running mode (eg. so tests can ignore data.sql) 
+       & so that the tests always run
+       --> controller tests sorted (issue finding other properties file)
+            https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+       --> proper date picker and date management
+       --> complete unit tests including for controller
+       
+   --> rethink whether query itself needs to be stored....or else consider Blob to store RouteQuery.routeInfo   
+   --> remember payment infos and allow user to select from previous or add a new payment info
+       --> payment info add new / remove / select   
+ -------------------------------------- 
+ COVERED:
+ - logging
+ - properties files and internationaization
+ - error handling
+ - session management, application and context
+ - page flow and model types
+ - enums: persistence and selection with thyme
+ - other html components binding with spring MVC
+ - units against h2
+ - hibernate connectivity to MySQL
+ - thyme conditions
+ - page fragments
+ - server side validation
+ - external js, css and images  
+ = spring MVC
+ = RPstruts background
+ = RPStruts notes
+ = shopping model
+ = problem: techs 10 years out of date.....and struts 1
+ = MVC
+ --------------------------------------
+ 
+ 
+ 
+ 
+ 
