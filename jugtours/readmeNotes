@@ -1,0 +1,8 @@
+
+Course:
+https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot
+
+Get lombok working on a MAC:
+https://nawaman.net/blog/2017-11-05
+Needs a 2nd lombok.jar registered on eclipse in MAC.....and set on in java compiler,
+and add to eclipse.ini.......restart eclipse

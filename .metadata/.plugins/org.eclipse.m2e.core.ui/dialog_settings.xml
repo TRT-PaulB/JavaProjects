@@ -65,6 +65,8 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/Users/paulbickell/Documents/JavaWorkspace1/jugtours"/>
+			<item value="/Users/paulbickell/Documents/JavaWorkspace1/RestDemo"/>
 			<item value="/Users/paulbickell/Documents/JavaWorkspace1/ReadOnlySpringMvcRoutePlanner"/>
 			<item value="/Users/paulbickell/Documents/JavaWorkspace1/SpringMvcRoutePlanner"/>
 		</list>
@@ -76,5 +78,17 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>
