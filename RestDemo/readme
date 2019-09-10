@@ -1,0 +1,8 @@
+
+PROJECT LINK:
+https://spring.io/guides/tutorials/react-and-spring-data-rest/
+
+JavaWorkspace1
+./mvnw spring-boot:run
+
+localhost:8080/api
