@@ -26,6 +26,7 @@ class GroupList extends Component {
 
   constructor(props) {
     super(props);
+    console.log("Constructor....");
     const {cookies} = props;
     this.state = {
       item: this.emptyItem,
@@ -36,9 +37,11 @@ class GroupList extends Component {
   }
 
   async componentDidMount() {
+    console.log("loading....");
     if (this.props.match.params.id !== 'new') {
       try {
         const group = await (await fetch(`/api/group/${this.props.match.params.id}`, {credentials: 'include'})).json();
+        console.log("GROUP", group);
         this.setState({item: group});
       } catch (error) {
         this.props.history.push('/');

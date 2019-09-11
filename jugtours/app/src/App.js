@@ -12,11 +12,11 @@ class App extends Component {
     return (
       <CookiesProvider>
         <Router>
-          <Switch>
+        <Switch>
             <Route path='/' exact={true} component={Home}/>
-            <Route path='/groups' exact={true} component={GroupList}/>
             <Route path='/groups/:id' component={GroupEdit}/>
-          </Switch>
+            <Route path='/groups' exact={true} component={GroupList}/>
+            </Switch>              
         </Router>
       </CookiesProvider>
     )
@@ -25,6 +25,7 @@ class App extends Component {
 
 export default App;
 
+// </Switch>
 
 // TODO OLD POC BELOW HERE................
 /*import logo from './logo.svg';
