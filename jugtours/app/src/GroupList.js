@@ -3,34 +3,75 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
 
+// security imports (start)
+import { withRouter } from 'react-router-dom';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
+// security imports (end)
+
 class GroupList extends Component {
+
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
+  emptyItem = {
+    name: '',
+    address: '',
+    city: '',
+    stateOrProvince: '',
+    country: '',
+    postalCode: ''
+  };
 
   constructor(props) {
     super(props);
-    this.state = {groups: [], isLoading: true};
-    this.remove = this.remove.bind(this);
+    const {cookies} = props;
+    this.state = {
+      item: this.emptyItem,
+      csrfToken: cookies.get('XSRF-TOKEN')
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({isLoading: true});
-
-    fetch('api/groups')
-      .then(response => response.json())
-      .then(data => this.setState({groups: data, isLoading: false}));
+  async componentDidMount() {
+    if (this.props.match.params.id !== 'new') {
+      try {
+        const group = await (await fetch(`/api/group/${this.props.match.params.id}`, {credentials: 'include'})).json();
+        this.setState({item: group});
+      } catch (error) {
+        this.props.history.push('/');
+      }
+    }
   }
 
-  async remove(id) {
-    await fetch(`/api/group/${id}`, {
-      method: 'DELETE',
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    let item = {...this.state.item};
+    item[name] = value;
+    this.setState({item});
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const {item, csrfToken} = this.state;
+
+    await fetch('/api/group', {
+      method: (item.id) ? 'PUT' : 'POST',
       headers: {
+        'X-XSRF-TOKEN': this.state.csrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
-    }).then(() => {
-      let updatedGroups = [...this.state.groups].filter(i => i.id !== id);
-      this.setState({groups: updatedGroups});
+      },
+      body: JSON.stringify(item),
+      credentials: 'include'
     });
+    this.props.history.push('/groups');
   }
+
 
   render() {
     const {groups, isLoading} = this.state;
@@ -87,4 +128,4 @@ class GroupList extends Component {
   }
 }
 
-export default GroupList;
+export default withCookies(withRouter(GroupList));

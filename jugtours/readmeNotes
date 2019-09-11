@@ -7,11 +7,17 @@ https://nawaman.net/blog/2017-11-05
 Needs a 2nd lombok.jar registered on eclipse in MAC.....and set on in java compiler,
 and add to eclipse.ini.......restart eclipse
 
-
-run:
-./mvnw spring-boot:run
-
+Test in URL and POSTMAN:
 http://localhost:8080/api/groups
+
+============================================================
+TO RUN: 
+
+JavaWorkspace1.jugtours     ==> ./mvnw spring-boot:run
+JavaWorkspace1.jugtours.app ==> npm start
+http://localhost:3000
+
+============================================================
 
 Create a new REACT project (called app) in the jugtours (webservice) directory
 - npm init react-app app
@@ -25,8 +31,19 @@ Create a new REACT project (called app) in the jugtours (webservice) directory
 
 --> To proxy from /api to http://localhost:8080/api, add a proxy setting to app/package.json.
 
---> note that I had to disable check that webpack was braking......in a new fiole .env in react app directory
+--> note that I had to disable check that webpack was braking......in a new file .env in react app directory
 
 Access client (with webservice and react running):
 http://localhost:3000
 
+see pom for spring security additions
+
+============================================================
+OKTA - cloud based identity service
+
+https://dev-771014.okta.com/login/login.htm
+Username:  paul.home47@gmail.com
+Password:  O+Gloss
+Your Okta domain: dev-771014.okta.com
+
+============================================================
