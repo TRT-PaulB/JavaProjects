@@ -1545,3 +1545,16 @@ Contains: Missing org.springframework.boot:spring-boot-starter-security:jar:java
 !MESSAGE Could not resolve artifact org.springframework.boot:spring-boot-starter-security:jar:javadoc:2.1.8.RELEASE
 !SUBENTRY 2 org.eclipse.m2e.core 4 -1 2019-09-11 15:16:48.529
 !MESSAGE Missing org.springframework.boot:spring-boot-starter-security:jar:javadoc:2.1.8.RELEASE
+!SESSION 2019-09-12 08:39:13.049 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_GB
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/paulbickell/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/paulbickell/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2019-09-12 08:39:27.851
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.core 1 0 2019-09-12 08:39:27.888
+!MESSAGE Using Apache MINA sshd as ssh client.
