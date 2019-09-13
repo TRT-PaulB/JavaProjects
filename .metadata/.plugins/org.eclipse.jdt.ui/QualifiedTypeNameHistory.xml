@@ -5,6 +5,7 @@
     <fullyQualifiedTypeName name="javax.persistence.Entity"/>
     <fullyQualifiedTypeName name="org.thymeleaf.expression.Objects"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
-    <fullyQualifiedTypeName name="com.fullstack.jugtours.dm.Group"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.fullstack.jugtours.dm.Group"/>
+    <fullyQualifiedTypeName name="com.fullstack.jugtours.dm.User"/>
 </qualifiedTypeNameHistroy>
