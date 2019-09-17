@@ -10,7 +10,7 @@ class GroupList extends Component {
     this.state = {groups: [], isLoading: true};
     this.remove = this.remove.bind(this);
   }
-
+  
   componentDidMount() {
     this.setState({isLoading: true});
 

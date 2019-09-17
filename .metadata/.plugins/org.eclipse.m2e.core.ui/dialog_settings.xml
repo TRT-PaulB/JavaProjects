@@ -65,6 +65,8 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/Users/paulbickell/Documents/JavaWorkspace1/MainApp"/>
+			<item value="/Users/paulbickell/Documents/JavaWorkspace1/okta-spring-boot-react-crud-example"/>
 			<item value="/Users/paulbickell/Documents/JavaWorkspace1/jugtours_withauth"/>
 			<item value="/Users/paulbickell/Documents/JavaWorkspace1/jugtours_noauth"/>
 			<item value="/Users/paulbickell/Documents/JavaWorkspace1/jugtours"/>

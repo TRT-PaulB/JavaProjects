@@ -2,6 +2,11 @@ import { Link, withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 
+import React, { Component } from 'react';
+import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import AppNavbar from './AppNavbar';
+
+
 class GroupList extends Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired

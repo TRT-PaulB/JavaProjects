@@ -1,6 +1,13 @@
 import { instanceOf } from 'prop-types';
 import { Cookies, withCookies } from 'react-cookie';
 
+// old imports from non-auth (start)
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import AppNavbar from './AppNavbar';
+// old imports from non-auth (end)
+
 class GroupEdit extends Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
@@ -46,22 +53,45 @@ class GroupEdit extends Component {
     this.setState({item});
   }
 
+  // ORIGINAL OOB NOT WORKING
+  // async handleSubmit(event) {
+  //   event.preventDefault();
+  //   const {item, csrfToken} = this.state;
+
+  //   await fetch('/api/group', {
+  //     method: (item.id) ? 'PUT' : 'POST',
+  //     headers: {
+  //       'X-XSRF-TOKEN': this.state.csrfToken,
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(item),
+  //     credentials: 'include'
+  //   });
+  //   this.props.history.push('/groups');
+  // }
+
+
   async handleSubmit(event) {
     event.preventDefault();
-    const {item, csrfToken} = this.state;
+    const {item} = this.state;
 
-    await fetch('/api/group', {
+    const urlSuffix = item.id ? '/item.id' : ''; 
+    const url = '/api/group' + urlSuffix;
+
+
+    await fetch(url, {
       method: (item.id) ? 'PUT' : 'POST',
       headers: {
-        'X-XSRF-TOKEN': this.state.csrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(item),
-      credentials: 'include'
     });
     this.props.history.push('/groups');
   }
+
+
 
   render() {
     const {item} = this.state;

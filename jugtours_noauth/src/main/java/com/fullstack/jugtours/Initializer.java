@@ -24,7 +24,7 @@ class Initializer implements CommandLineRunner {
         );
 
         
-        // work around as anotation processing is not working
+        // work around as annotation processing is not working
         Group djug = repository.findByName("Denver JUG");
         Event e = Event.builder().title("Full Stack Reactive")
                 .description("Reactive with Spring Boot + React")
